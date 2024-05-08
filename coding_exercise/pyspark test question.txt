@@ -1,0 +1,95 @@
+1.Create given data to a nested json file with department as the key
+Schema : {Name, department, Salary}
+     data = [("James", "Sales", 3000),
+        ("Michael", "Sales", 4600),
+        ("Robert", "Sales", 4100),
+        ("Maria", "Finance", 3000),
+        ("James", "Sales", 3000),
+        ("Scott", "Finance", 3300),
+        ("Jen", "Finance", 3900),
+        ("Jeff", "Marketing", 3000),
+        ("Kumar", "Marketing", 2000),
+        ("Saif", "Sales", 4100)]
+
+Expected output:
+Department, employees[Employee name, Salary]
+Sales,[{"Employee Name":"James","Salary":3000},{"Employee Name":"Robert","Salary":4100},{"Employee Name":"Michael","Salary":4600},{"Employee Name":"James","Salary":3000},{"Employee Name":"Saif","Salary":4100}]
+Finance,[{"Employee Name":"Scott","Salary":3300},{"Employee Name":"Maria","Salary":3000},{"Employee Name":"Jen","Salary":3900}]
+Marketing,[{"Employee Name":"Jeff","Salary":3000},{"Employee Name":"Kumar","Salary":2000}]
+
+
+2.
+Exploded json message in csv files and generate below files metadata_{timestamp}.csv and result_{timestamp}.csv.
+Also handle scenario where testResult is null than blank file with only column name should be generated for result
+
+Sample data :
+
+topic|offset|data|epoctime
+kafkatopic1|1|{"metadata": {"Id": 1, "balance": 1,"result":3},"balances": {"Id": 1, "name": "C1", "status": "S", "busDate": "2023-11-10"}, "testResult": [{"resultId": 1, "Id": 1, "resultName": "Maths", "resultValue": 98.0}, {"resultId": 2, "Id": 1, "resultName": "English", "resultValue": 98.0}, {"resultId": 3, "Id": 1, "resultName": "Science", "resultValue": 95.0}]}|1700736290127
+kafkatopic1|2|{"metadata": {"Id": 2, "balance": 1,"result":3}, "balances": {"Id": 2, "name": "C2", "status": "S", "busDate": "2023-11-10"}, "testResult": [{"resultId": 1, "Id": 2, "resultName": "Maths", "resultValue": 93.0}, {"resultId": 2, "Id": 2, "resultName": "English", "resultValue": 98.0}, {"resultId": 3, "Id": 2, "resultName": "Science", "resultValue": 94.0}]}|1700736290128
+kafkatopic1|3|{"metadata": {"Id": 3, "balance": 1,"result":3}, "balances": {"Id": 3, "name": "C3", "status": "S", "busDate": "2023-11-10"}, "testResult": [{"resultId": 1, "Id": 3, "resultName": "Maths", "resultValue": 93.0}, {"resultId": 2, "Id": 3, "resultName": "English", "resultValue": 98.0}, {"resultId": 3, "Id": 3, "resultName": "Science", "resultValue": 94.0}]}|1700736290129
+
+Expected output
+metadata : 
+Id,balance,result,offset,busDate(convert epoctime to timestamp and use that as busDate)
+1,1,3,1,2023-11-23 10:44:50.127
+2,1,3,2,2023-11-23 10:44:50.128
+3,1,3,3,2023-11-23 10:44:50.129
+
+result :
+resultId, Id, resultName,resultValue,busDate
+1,1,Maths,98.0,2023-11-23 10:44:50.127
+2,1,English,98.0,2023-11-23 10:44:50.127
+3,1,Science,95.0,2023-11-23 10:44:50.127
+1,2,Maths,93.0,2023-11-23 10:44:50.128
+2,2,English,98.0,2023-11-23 10:44:50.128
+3,2,Science,94.0,2023-11-23 10:44:50.128
+1,3,Maths,93.0,2023-11-23 10:44:50.129
+2,4,English,98.0,2023-11-23 10:44:50.129
+3,5,Science,94.0,2023-11-23 10:44:50.129
+
+
+
+Sample data for scenario when testResult is null
+topic|offset|data|epoctime
+kafkatopic1|1|{"metadata": {"Id": 1, "balance": 1,"result":3},"balances": {"Id": 1, "name": "C1", "status": "S", "busDate": "2023-11-10"}, "testResult": []|1700736290127
+
+Expected output :
+metadata : 
+Id,balance,result,offset,busDate(convert epoctime to timestamp and use that as busDate)
+1,1,3,1,2023-11-23 10:44:50.127
+
+result :
+resultId, Id, resultName,resultValue,busDate
+
+ 
+
+3.Read the csv file given below  and display it correctly along with corrupt records which done not follow the schema
+
+Schema : 
+Name   StringType
+Age    IntegerType      
+Gender StringType
+Occupation StringType
+Hobby      StringType
+
+Store below sample  data into a file and display the filename and line number which is corrupt while generating data frame.
+
+Sample data
+Michael,x48,Male,Sales, “Loves to play guitar\, especially when it's \nraining outside.”
+Robert, 35,Male,Sales, “Enjoys hiking and camping in the mountains. \nHer favourite season is fall.”
+Jane, 28,Female, Marketing, “Enjoys hiking and camping in the mountains. 
+Her favourite season is fall.” ,Married
+Bob, 42,Male, Finance, “Likes to read\, watch movies, \nand spend time with his family.”
+
+
+4.On the sample data given below, remove duplicates on the combination of Name and age and store data in a data dictionary. 
+Please provide 2 different approach to solve this issue one with spark sql and another without spark sql
+             Name    Age Location
+             Ronak    21  London
+             Atul     28  California
+             Sam      26  Delhi
+             Rakesh   21  Manchester
+             Yash     29  Mumbai
+			 
+5.Create a CSV file with 100 rows of any random data over two-three columns. Read the csv file and store as parquet in max 10 files. 
