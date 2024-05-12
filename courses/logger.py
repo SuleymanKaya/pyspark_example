@@ -1,3 +1,5 @@
+from typing import Any
+
 from pyspark.sql import SparkSession
 
 
@@ -21,7 +23,7 @@ class Log4j:
         """Log a message at the WARN level."""
         self.logger.warn(message)
 
-    def info(self, message: str) -> None:
+    def info(self, message: Any) -> None:
         """Log a message at the INFO level."""
         self.logger.info(message)
 
