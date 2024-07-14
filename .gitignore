@@ -1,9 +1,9 @@
 venv/
 __pycache__
-data/
-data_sink/
-data_source/
-data_unstructured/
-join_data/
-metastore_db/
-spark-warehouse/
+# data/
+# data_sink/
+# data_source/
+# data_unstructured/
+# join_data/
+# metastore_db/
+# spark-warehouse/
