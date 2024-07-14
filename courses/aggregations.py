@@ -10,7 +10,7 @@ if __name__ == "__main__":
     invoice_df = spark.read.format("csv") \
         .option("header", "true") \
         .option("inferSchema", "true") \
-        .load("data_source/invoices.csv")
+        .load("data/data_source/invoices.csv")
 
     # Select based for single row
     invoice_df.select(count("*").alias("Count *"),
@@ -59,7 +59,7 @@ if __name__ == "__main__":
         .groupBy("Country", "WeekNumber") \
         .agg(num_invoices_agg, quantity_agg, invoice_value_agg)
 
-    ex_summary_df.coalesce(1).write.format("parquet").mode("overwrite").save("data_sink/aggregations/")
+    ex_summary_df.coalesce(1).write.format("parquet").mode("overwrite").save("data/data_sink/aggregations/")
     ex_summary_df.sort("Country", "WeekNumber").show()
 
     spark.stop()

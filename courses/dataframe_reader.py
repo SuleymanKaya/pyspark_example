@@ -38,7 +38,7 @@ if __name__ == "__main__":
         .schema(flightSchemaStruct) \
         .option("mode", "FAILFAST") \
         .option("dateFormat", "M/d/y") \
-        .load("data_source/flight*.csv")
+        .load("data/data_source/flight*.csv")
 
     flightTimeCsvDF.show(5)
     logger.info("CSV Schema:" + flightTimeCsvDF.schema.simpleString())
@@ -47,14 +47,14 @@ if __name__ == "__main__":
         .format("json") \
         .schema(flightSchemaDDL) \
         .option("dateFormat", "M/d/y") \
-        .load("data_source/flight*.json")
+        .load("data/data_source/flight*.json")
 
     flightTimeJsonDF.show(5)
     logger.info("JSON Schema:" + flightTimeJsonDF.schema.simpleString())
 
     flightTimeParquetDF = spark.read \
         .format("parquet") \
-        .load("data_source/flight*.parquet")
+        .load("data/data_source/flight*.parquet")
 
     flightTimeParquetDF.show(5)
     logger.info("Parquet Schema:" + flightTimeParquetDF.schema.simpleString())

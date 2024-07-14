@@ -6,7 +6,7 @@ if __name__ == "__main__":
     spark = SparkSession.builder.master("local[3]").appName("SparkTable").enableHiveSupport().getOrCreate()
     logger = Log4j(spark)
 
-    flight_time_parquet_df = spark.read.format("parquet").load("data_source/flight*.parquet")
+    flight_time_parquet_df = spark.read.format("parquet").load("data/data_source/flight*.parquet")
 
     spark.sql("CREATE DATABASE IF NOT EXISTS AIRLINE_DB")
     spark.catalog.setCurrentDatabase("AIRLINE_DB")

@@ -15,7 +15,7 @@ if __name__ == "__main__":
     sc = spark.sparkContext
     logger = Log4j(spark)
 
-    linesRDD = sc.textFile(name="data_source/surveys2.csv")
+    linesRDD = sc.textFile(name="data/data_source/surveys2.csv")
     partitionedRDD = linesRDD.repartition(2)
 
     colsRDD = partitionedRDD.map(lambda line: line.replace('"', '').split(","))

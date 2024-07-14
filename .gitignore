@@ -1,8 +1,7 @@
-.idea/
 venv/
 __pycache__
-data_sink/
-data_source/
-metastore_db/
-spark-warehouse/
-data_unstructured/
+# data_sink/
+# data_source/
+# metastore_db/
+# spark-warehouse/
+# data_unstructured/

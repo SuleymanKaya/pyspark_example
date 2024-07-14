@@ -12,7 +12,7 @@ if __name__ == "__main__":
         spark.read.
         option("header", "true").
         option("inferSchema", "true")
-        .csv(path="data_source/surveys.csv")
+        .csv(path="data/data_source/surveys.csv")
     )
     survey_df.createOrReplaceTempView("survey_view")
     # survey_df2 = survey_df.toPandas() # for debugging

@@ -25,7 +25,7 @@ if __name__ == "__main__":
     survey_df = spark.read \
         .option("header", "true") \
         .option("inferSchema", "true") \
-        .csv("data_source/surveys.csv")
+        .csv("data/data_source/surveys.csv")
     survey_df.show(10)
 
     # Dataframe based

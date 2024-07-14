@@ -7,7 +7,7 @@ if __name__ == "__main__":
     spark = SparkSession.builder.master("local[3]").appName("UnstructuredLogFile").getOrCreate()
     logger = Log4j(spark)
 
-    file_df = spark.read.text("data_unstructured/apache_logs.txt")
+    file_df = spark.read.text("data/data_unstructured/apache_logs.txt")
     file_df.printSchema()
 
     log_reg = r'^(\S+) (\S+) (\S+) \[([\w:/]+\s[+\-]\d{4})\] "(\S+) (\S+) (\S+)" (\d{3}) (\S+) "(\S+)" "([^"]*)'
