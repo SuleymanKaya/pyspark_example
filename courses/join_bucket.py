@@ -7,8 +7,8 @@ if __name__ == "__main__":
     logger = Log4j(spark)
 
     # Read dataframes
-    flight_time_df1 = spark.read.json("data/join_data/d1/")
-    flight_time_df2 = spark.read.json("data/join_data/d2/")
+    # flight_time_df1 = spark.read.json("data/join_data/d1/")
+    # flight_time_df2 = spark.read.json("data/join_data/d2/")
 
     # Bucketing to database
     # spark.sql("CREATE DATABASE IF NOT EXISTS my_db")
@@ -37,5 +37,5 @@ if __name__ == "__main__":
     join_expr = df3.id == df4.id
     join_df = df3.join(other=df4, on=join_expr, how='inner')
     join_df.collect()
-    input("press a key to stop...")
+    input("press a key (enter) to stop...")
     spark.stop()

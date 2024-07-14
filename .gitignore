@@ -7,3 +7,4 @@ data_unstructured/
 join_data/
 metastore_db/
 spark-warehouse/
+derby.log
